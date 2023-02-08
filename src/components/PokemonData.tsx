@@ -2,10 +2,9 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useRef } from 'react'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { data } from '../createSlice/pokemonSlice'
 
 const Pokemondata = () => {
-    const {pokemon} = useAppSelector((state) => state.pokemon)
+    const {search} = useAppSelector((state) => state.pokemon)
     const ref = useRef<number>(1)
 
    type Pokemon = {
@@ -28,11 +27,12 @@ const Pokemondata = () => {
 
     const { isLoading, error, data: pokemons } = useQuery('pokemonData', getPokemonData)
 
-    
-    const PokemonList = (pokemons as unknown as PokemonList)?.results.slice(0,100).map(pokemon => (
-        <div key = {ref.current++} >
-            <a href = '#'>{pokemon.name}</a>
-        </div>
+    const searchPokemons = (pokemons as unknown as PokemonList)?.results.slice(0,100).filter(pokemonFilter => pokemonFilter.name.toLowerCase().includes(search.toLowerCase()))
+
+    const pokemonList = searchPokemons?.map(pokemon => (
+      <div key = {ref.current++} >
+          <a href = '#'>{pokemon.name}</a>
+      </div>
     ))
 
   return (
@@ -44,7 +44,7 @@ const Pokemondata = () => {
       </>
       }
       {error && (error as any).message}
-      {pokemons && PokemonList}
+      {pokemons && pokemonList}
     </div>
   )
 }
