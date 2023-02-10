@@ -1,52 +1,20 @@
-import React from 'react'
+import {useParams} from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { useRef } from 'react'
-import { useAppSelector, useAppDispatch } from '../app/hooks'
 
-const Pokemondata = () => {
-    const {search} = useAppSelector((state) => state.pokemon)
-    const ref = useRef<number>(1)
-
-   type Pokemon = {
-        name: string,
-        url: string
-   }
-
-   type PokemonList = {
-        results: Array<Pokemon>
-   }
-
+function PokemonData() {
+    let {id} = useParams()
     async function getPokemonData() {
-        try {
-            const data: Pokemon[] = await (await fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1000')).json()
-            return data
-        } catch(error: any) {
-            console.log("Error loading data", error.message)
-        }
+      const data = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)).json()
+      return data
     }
 
-    const { isLoading, error, data: pokemons } = useQuery('pokemonData', getPokemonData)
-
-    const searchPokemons = (pokemons as unknown as PokemonList)?.results.slice(0,100).filter(pokemonFilter => pokemonFilter.name.toLowerCase().includes(search.toLowerCase()))
-
-    const pokemonList = searchPokemons?.map(pokemon => (
-      <div key = {ref.current++} >
-          <a href = '#'>{pokemon.name}</a>
-      </div>
-    ))
-
+    const {isLoading,data} = useQuery('pokemonData', getPokemonData)
   return (
-    <div className='grid max-[350px]:grid-cols-1 max-sm:grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 p-2'>
-      {isLoading && 
-      <>
-        <svg className="animate-spin h-5 w-5 mr-3 rounded-full " viewBox="0 0 24 24" />
-        <span>Loading ...</span>
-      </>
-      }
-      {error && (error as any).message}
-      {pokemons && pokemonList}
-    </div>
+   <>
+    {isLoading && <>Loading ...</>}
+    {JSON.stringify(data)}
+   </>
   )
 }
 
-export default Pokemondata
+export default PokemonData

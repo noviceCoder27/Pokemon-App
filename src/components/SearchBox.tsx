@@ -1,4 +1,3 @@
-import React from 'react'
 import PokeDex from '../assets/Pokedex.png'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
 import { input } from '../createSlice/pokemonSlice'
