@@ -1,9 +1,8 @@
 import PokeDex from '../assets/Pokedex.png'
-import { useAppSelector, useAppDispatch } from '../app/hooks'
+import { useAppDispatch } from '../app/hooks'
 import { input } from '../createSlice/pokemonSlice'
 
 const SearchBox = () => {
-    const {search} = useAppSelector((state) => state.pokemon)
     const dispatch = useAppDispatch()
 
     return (

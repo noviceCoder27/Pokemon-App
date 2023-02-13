@@ -4,12 +4,12 @@ import type { RootState } from '../app/store'
 
 interface PokemonSlice {
     search: string,
-    pokemon: string
+    pokemon: Array<string>
 }
 
 const initialState: PokemonSlice = {
     search: '',
-    pokemon: ''
+    pokemon: [],
 }
 
 export const pokemonSlice = createSlice({
@@ -20,7 +20,7 @@ export const pokemonSlice = createSlice({
             state.search = action.payload
         },
         data: (state,action: PayloadAction<string>) => {
-            state.pokemon = action.payload
+            state.pokemon.push(action.payload)
         }
     }
 })

@@ -1,0 +1,7 @@
+Q) Why you shouldn't use useMemo inside a query function?
+
+Yes, that's correct. It's generally not recommended to use useMemo inside the query function of a useQuery hook, because it creates an additional React component tree that is not properly managed by React. This can result in multiple copies of React being used in the same app, which can cause problems with the correct functioning of React and its hooks.
+
+It's usually better to use useMemo outside the query function, as described in my previous answer. That way, the memoized value can be correctly managed by React and shared between multiple renderings of the component.
+
+It's important to be careful when using React hooks, and to make sure that you understand the consequences of using them in different ways. Always make sure to follow the recommended patterns and best practices when using React hooks in your applications.
