@@ -10,25 +10,27 @@ const Pokemondata = () => {
     message: string
    }
     const {pokemon} = useAppSelector((state) => state.pokemon)
-    useEffect(() => {
 
-    },[])
+    // useEffect(() => {
+    //   console.log(pokemon)
+    // },[pokemon])
 
     async function getPokemonId() {
       try {
-        if(pokemon.length !== 0) {
-          const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon[0]}`)
-        } else {
-          console.log('Pokemon array is not yet loaded')
-        }
-        
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon[0]}`)     
       } catch(err: unknown) {
-          console.log('Error fetching data: ', err.message)
-        
+          console.log('Error fetching data')
       }
     }
     
-    const {data:id} = useQuery('pokemonID', getPokemonId)
+    const {
+      status,
+      data: pokemonID,
+    } = useQuery({
+      queryKey: ['projects', pokemon],
+      queryFn: getPokemonId,
+      enabled: pokemon.length !== 0,
+    })
     
     
     // async function getId(pokemon: Pokemons) {
