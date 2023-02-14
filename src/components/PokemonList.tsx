@@ -17,10 +17,12 @@ const Pokemondata = () => {
   
     function getPokemonId() {
         pokemons.map( pokemon =>    
-          fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-          .then(res => res.json())
-          .then(data => setPokemonData(prev=> { return [...prev,data]}))
-        )
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+        .then(res => res.json())
+        .then(data => setPokemonData(prev=> { return [...prev,data]}))
+      )
+      
+        
     }
     
     useQuery({
@@ -30,11 +32,18 @@ const Pokemondata = () => {
     })
 
     const pokemonList = useMemo(() => {
-      return pokemonData.map(pokemon => (
-        <div key = {pokemon.id}>
-          <Link to = {`/${pokemon.id}`}>{pokemon.name}</Link>
-        </div>
-      ))
+      if(pokemonData.length === pokemons.length) {
+        return pokemonData.map(pokemon => (
+          <div key = {pokemon.id}>
+            <Link to = {`/${pokemon.id}`}>{pokemon.name}</Link>
+          </div>
+        ))
+      } else {
+        return (
+          <></>
+        )
+      }
+      
     },[pokemonData]) 
   
   return (
