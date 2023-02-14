@@ -1,9 +1,13 @@
 import PokeDex from '../assets/Pokedex.png'
 import { useAppDispatch } from '../app/hooks'
 import { input } from '../createSlice/pokemonSlice'
+import { useEffect } from 'react'
 
 const SearchBox = () => {
     const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(input(''))
+    },[])
 
     return (
         <div className='bg-red-500 p-2 flex flex-col max-sm:items-center'>

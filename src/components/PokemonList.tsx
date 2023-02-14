@@ -13,7 +13,7 @@ const Pokemondata = () => {
     
     const {pokemons} = useAppSelector((state) => state.pokemon)
     const [pokemonData, setPokemonData] = useState<Array<Pokemons>>([])
-
+    const {search} = useAppSelector(state => state.pokemon)
   
     function getPokemonId() {
         pokemons.map( pokemon =>    
@@ -28,8 +28,6 @@ const Pokemondata = () => {
           
         }))
       )
-      
-        
     }
     
     useQuery({
@@ -40,18 +38,21 @@ const Pokemondata = () => {
 
     const pokemonList = useMemo(() => {
       if(pokemonData.length === pokemons.length) {
-        return pokemonData.map(pokemon => (
-          <div key = {pokemon.id}>
-            <Link to = {`/${pokemon.id}`}>{pokemon.name}</Link>
-          </div>
-        ))
+        return pokemonData.map(pokemon => {
+          if(pokemon.name.includes(search)) {
+            return ( 
+              <div key = {pokemon.id}>
+                <Link to = {`/${pokemon.id}`}>{pokemon.name}</Link>
+              </div>
+            )}
+          })
       } else {
         return (
           <></>
         )
       }
       
-    },[pokemonData]) 
+    },[pokemonData,search]) 
   
   return (
     <div className='grid max-[350px]:grid-cols-1 max-sm:grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 p-2'>
