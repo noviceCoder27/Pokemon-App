@@ -54,8 +54,9 @@ const Pokemon = () => {
   
   
   useEffect(() => {
-    pokemons?.results.map(pokemon => dispatch(data(pokemon.name)))
+    pokemons?.results.slice(0,100).map(pokemon => dispatch(data(pokemon.name)))
   },[pokemons])
+
   return (
       <RouterProvider router = {router}/>
   )
