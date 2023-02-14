@@ -2,9 +2,30 @@ import {useParams} from 'react-router-dom'
 import { useQuery } from 'react-query'
 
 function PokemonData() {
+
+  type stats = {
+    name: string,
+  }
+
+  type statistics = {
+    stat: stats
+    base_stat: number,
+  }
+
+  type imageTypes = {
+    front_default: string,
+    back_deafult: string
+  }
+
+  type Pokemon = {
+    sprites: imageTypes,
+    name: string,
+    stats: Array<statistics>
+  }
+
     let {id} = useParams()
     async function getPokemonData() {
-      const data = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)).json()
+      const data: Pokemon = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)).json()
       return data
     }
 
