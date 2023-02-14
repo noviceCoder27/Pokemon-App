@@ -50,7 +50,7 @@ const Pokemon = () => {
   }
 
 
-  const { isLoading, error, data: pokemons } = useQuery('pokemonList', getPokemonList)
+  const { data: pokemons } = useQuery('pokemonList', getPokemonList)
   
   
   useEffect(() => {

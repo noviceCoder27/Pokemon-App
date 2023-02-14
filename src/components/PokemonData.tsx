@@ -10,10 +10,24 @@ function PokemonData() {
 
     const {isLoading,data} = useQuery('pokemonData', getPokemonData)
   return (
-   <>
+   <div className='flex flex-col justify-center items-center h-screen '>
     {isLoading && <>Loading ...</>}
-    {JSON.stringify(data)}
-   </>
+    <h1 className='text-3xl font-mono'>Pokemon Stats</h1>
+    <img src = {data?.sprites.front_default} className = 'w-40'/>
+    <div className='font-bold'>
+      <span>Name: </span>
+      <span>{data?.name}</span>
+    </div>
+    <div className='flex flex-col mt-2 w-40'>
+      {data?.stats.map((statistics,index) => (
+        <div key = {index} className = 'flex justify-between'>
+          <p>{`${statistics.stat.name}: `}</p>
+          <p>{statistics.base_stat}</p>
+        </div>
+      ))}
+    </div>
+   
+   </div>
   )
 }
 

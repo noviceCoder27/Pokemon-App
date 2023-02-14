@@ -19,7 +19,14 @@ const Pokemondata = () => {
         pokemons.map( pokemon =>    
         fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
         .then(res => res.json())
-        .then(data => setPokemonData(prev=> { return [...prev,data]}))
+        .then(data => setPokemonData(prev=> {
+          if(pokemonData.length < 100) {
+            return [...prev,data]
+          } else {
+            return [...prev]
+          }
+          
+        }))
       )
       
         
