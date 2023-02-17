@@ -31,7 +31,7 @@ function PokemonData() {
 
     const {isLoading,data} = useQuery('pokemonData', getPokemonData)
   return (
-   <div className='flex flex-col justify-center items-center h-screen '>
+   <div className='flex flex-col justify-center items-center h-screen bg-purple-600 text-slate-200'>
     {isLoading && <>Loading ...</>}
     <h1 className='text-3xl font-mono'>Pokemon Stats</h1>
     <img src = {data?.sprites.front_default} className = 'w-40'/>

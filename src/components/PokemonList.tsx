@@ -55,7 +55,7 @@ const Pokemondata = () => {
     },[pokemonData,search]) 
   
   return (
-    <div className='grid max-[350px]:grid-cols-1 max-sm:grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 p-2'>
+    <div className='grid max-[350px]:grid-cols-1 max-sm:grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 p-2 bg-slate-200'>
       {pokemonList}
     </div>
   )
