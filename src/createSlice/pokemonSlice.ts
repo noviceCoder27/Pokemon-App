@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../app/store'
 
 interface PokemonSlice {
     search: string,
@@ -26,5 +25,4 @@ export const pokemonSlice = createSlice({
 })
 
 export const {input, data} = pokemonSlice.actions
-export const selectCount = (state: RootState) => state.pokemon
 export default pokemonSlice.reducer
