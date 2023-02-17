@@ -15,12 +15,6 @@ const router = createBrowserRouter([
       <SearchBox />
       <PokemonList />
     </>,
-    children: [
-      {
-        path: 'pokemons/:id',
-        element: <PokemonData />
-      }
-    ]
   },
   {
     path: "/:id",
